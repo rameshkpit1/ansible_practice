@@ -1,0 +1,15 @@
+---
+- hosts: all
+  user: ansible
+  sudo: yes
+  gather_facts: yes
+  tasks:
+    - name: Installing httpd
+      yum: name=httpd state=present
+      async: 60
+      poll: 10
+      notify: Install httpd
+  handlers:
+       - name: Install httpd
+         service: name=httpd state=restarted
+

@@ -1,0 +1,18 @@
+---
+- hosts: all
+  user: ansible
+  sudo: yes
+  gather_facts: yes
+  tasks:
+          - name: Installing apache2
+            apt:
+               name: apache2
+               state: present
+            run_once: true
+            delegate_to: 10.128.0.9
+            notify: install httpd
+  handlers:
+          - name: install httpd
+            service:
+                 name: apache2
+                 state: restarted

@@ -1,0 +1,11 @@
+---
+- hosts: myserver
+  user: ansible
+  sudo: yes
+  gather_facts: no
+  tasks:
+    - name: user creation
+      user: 
+        name: testuser2
+        state: present
+        shell: /bin/bash

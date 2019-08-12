@@ -1,0 +1,14 @@
+---
+- hosts: all
+  user: ansible
+  sudo: yes
+  gather_facts: no
+  tasks:
+    - name: install apache
+      apt:
+       name: apache2
+       state: present
+    - name: start service
+      service:
+              name: apache2
+              state: restarted

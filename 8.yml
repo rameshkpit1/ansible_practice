@@ -1,0 +1,27 @@
+---
+- hosts: all
+  user: ansible
+  sudo: yes
+  gather_facts: yes
+  tasks:
+    - name: install httpd
+      yum:
+        name: httpd
+        state: present
+      when: ansible_os_family ==  "RedHat"
+      notify: Start httpd
+    - name: install apache2
+      apt:
+        name: apache2
+        state: present
+      when: ansible_os_family == 'Debian'
+      notify: start apache2
+  handlers:
+       - name : Start httpd
+         service:
+                 name: httpd
+                 state: restarted
+       - name: start apache2
+         service:
+                 name: apache2
+                 state: restarted

@@ -1,0 +1,15 @@
+---
+- hosts: all
+  user: ansible
+  sudo: yes
+  gather_facts: no
+  vars:
+          v1: hello
+  tasks:
+     - name: when condition
+       debug:
+               msg: "echo hello hi {{ item }} "
+       with_items:
+               - hello
+               - hello2
+       when: v1 == "{{ item }}"
